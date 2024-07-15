@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <title>Anime Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #202125;
+        }
+        
+        .scroll {
+            overflow-x: hidden;
+            white-space: nowrap;
+        }
+        
+        .mar {
+            display: inline-block;
+            margin-right: 10px;
+            height: 200px;
+            width: 340px;
+            padding: 3px;
+            border-radius: 20px 0 20px 0;
+        }
+        
+        ul li a {
+            color: white;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            border-radius: 160px 0 160px 0;
+            background: linear-gradient(145deg, #5c5a5a, #1e2227);
+            ;
+            padding: 20px 0;
+        }
+        
+        .ff li:hover {
+            color: rgba(255, 42, 0, 0.9);
+            cursor: pointer;
+        }
+        
+        .footer h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer ul li {
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .footer a img {
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+        }
+        
+        hr {
+            border-top: 1px solid white;
+        }
+        
+        #copyright {
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
+        }
+        
+        marquee {
+            border: 5px solid white;
+            border-radius: 20px 3px 30px 3px;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 90%;
+            margin-left: 5%;
+            overflow: hidden;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 30%;
+        }
+        
+        .carousel-inner {
+            height: 90vh;
+        }
+        
+        #cyn-dots {
+            position: relative;
+        }
+        
+        #living-room-2 {
+            height: 40vh;
+            border-radius: 10%;
+            position: relative;
+            z-index: 1;
+            top: 20%;
+            left: -20%;
+        }
+        
+        #table {
+            height: 30vh;
+            border-radius: 10%;
+            position: relative;
+            z-index: 2;
+            top: -55%;
+            left: 40%;
+        }
+        
+        #living-room-3 {
+            height: 30vh;
+            border-radius: 10%;
+            position: absolute;
+            z-index: 2;
+            top: 45%;
+            left: 55%;
+        }
+        
+        .bb {
+            background-color: rgb(255, 255, 255);
+            opacity: 0.9;
+        }
+        
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+        
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        
+        @media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+            .sidebar a {
+                font-size: 18px;
+            }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        
+        .header-container h2 {
+            margin: 0;
+        }
+        
+        .chng:hover {
+            color: orange;
+        }
+        
+        .chng {
+            color: white
+        }
+        
+        .zz {
+            margin-top: -2%;
+        }
+        
+        .card-hover {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .img-area {
+            position: relative;
+        }
+        
+        .img-area .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .img-area .play-icon {
+            color: white;
+            display: none;
+        }
+        
+        .img-area:hover .overlay {
+            opacity: 1;
+        }
+        
+        .img-area:hover .play-icon {
+            display: block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="zz">
+        <header class="header-container">
+            <div class="col-md-2"></div>
+            <h2 class="text-light text-center">TV<span style="color: red;">FLix</span></h2>
+            <div class="col-md-2 d-flex justify-content-end he">
+                <li class="nav-item mr-4">
+                    <a class="nav-link text-light" href="#"><i class="bi bi-person-check fa-2x chng" data-toggle="popover" data-placement="top"  title="User already logged in"></i></a>
+                </li>
+            </div>
+        </header>
+    </section>
+    <div class="conatiner-fluid">
+        <section style="width: 90vw; margin-left: 70px;">
+            <nav class="navbar navbar-expand-lg navbar-dark ">
+                <a class="navbar-brand text-light" href="main.html">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="openNav()">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#contt">Suggestion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="3d.html">3D view</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#hh">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="main2.html"><i class="fas fa-search " style="color: #FFD43B;"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+
+        <div id="mySidebar" class="sidebar">
+            <a href="#contt">Suggestion</a>
+            <a href="index3.html">3D view</a>
+            <a href="#hh">About</a>
+            <a href="main2.html">Search</a>
+        </div>
+        <section class="mt-4">
+            <div class="scroll">
+                <marquee behaviour="scroll" scrollamount="15" bgcolor="#202125" direction="right">
+                    <img class="mar" src="https://avatarfiles.alphacoders.com/374/thumb-350-374996.webp" height="100px" alt="Death Note">
+                    <img class="mar" src="https://e1.pxfuel.com/desktop-wallpaper/4/1021/desktop-wallpaper-denji-chainsaw-man-chainsaw-man-thumbnail.jpg " alt="Naruto 3">
+                    <img class="mar" src="https://images.alphacoders.com/132/thumbbig-1329915.webp " alt="Slayer">
+                    <img class="mar" src="https://images8.alphacoders.com/783/thumb-440-783039.webp " alt="Titan">
+                    <img class="mar" src="https://images6.alphacoders.com/415/thumb-440-415519.webp " alt="Naruto">
+                    <img class="mar" src="https://images3.alphacoders.com/134/thumb-440-1345655.webp " alt="Chainsaw">
+                    <img class="mar" src="https://picfiles.alphacoders.com/319/thumb-1920-319765.jpg" alt="Silent">
+                </marquee>
+            </div>
+        </section>
+
+    </div>
+    <div class="container mt-5" id="contt">
+        <div class="row mt-5">
+            <div class="card-deck">
+                <div class="card bg-success card-hover " style="width: 300px; height: 410px;">
+                    <div class="img-area">
+                        <img src="https://mfiles.alphacoders.com/922/thumb-350-922431.png" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <a href="main2.html#Sv"> <i class="fa fa-play fa-3x play-icon"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title">A Silent Voice</h4>
+                        <a href="shorts/SV.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a>
+                    </div>
+
+                </div>
+                <div class="card bg-success card-hover " style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://mfiles.alphacoders.com/100/thumb-350-1002639.png" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <a href="main2.html#Sv"> <i class="fa fa-play fa-3x play-icon"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">DeathNote</h4>
+                        <a href="shorts/DN.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a>
+                    </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://images3.alphacoders.com/602/thumb-440-602092.webp" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <a href="main2.html#Sv"> <i class="fa fa-play fa-3x play-icon"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Naruto</h4>
+                        <a href="shorts/Naruto.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover " style="width: 300px;height:410px;">
+                    <div class="img-area">
+                        <img src="https://mfiles.alphacoders.com/100/thumb-350-1007545.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <a href="main2.html#chain"> <i class="fa fa-play fa-3x play-icon"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Chainsaw Man</h4>
+                        <a href="shorts/CM.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a> </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="card-deck">
+                <div class="card bg-success card-hover" style="width:300px;height: 410px;">
+                    <div class="img-area">
+                        <img src="https://wallpapercave.com/wp/wp6608362.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <a href="main2.html#Sv"> <i class="fa fa-play fa-3x play-icon"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">TMKOC</h4>
+                        <a href="shorts/tmkoc1.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover " style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://stat5.bollywoodhungama.in/wp-content/uploads/2024/06/Bad-Newz-322x402.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <a href="main2.html#Sv"> <i class="fa fa-play fa-3x play-icon"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Bad Newz</h4>
+                        <a href="shorts/BN.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNWE1OGFkOTktZWUxZC00ZGJlLTljMmQtMDI5MWVmMTc1YTg0XkEyXkFqcGdeQXVyMTQ3Mzk2MDg4._V1_QL75_UX1230_.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <a href="main2.html#Sv"> <i class="fa fa-play fa-3x play-icon"></i>
+                                <a href="main2.html#Sv">
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Kanguva</h4>
+                        <a href="shorts/kanguva.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://stat5.bollywoodhungama.in/wp-content/uploads/2024/06/Kalki-2898-AD-10-322x483.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Kalki 2898 AD</h4>
+                        <a href="shorts/Kalki.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch  FullScreen Video</a> </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="card-deck">
+                <div class="card bg-success card-hover" style="width: 410px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://media5.bollywoodhungama.in/wp-content/uploads/2024/07/Auron-Mein-Kahan-Dum-Tha-322x402.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title" style="font-size: 17px;">Auron Main Kahan Dum Tha</h4>
+                        <a href="shorts/Amkdt.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch  FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaSDDDI_-pQSP8JcKU3KHiLhn1DVzFmkRDhj67L94gXgIsrokG" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Wagle ki Duniya</h4>
+                        <a href="shorts/Wkd.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch  FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover " style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://wallpapercave.com/wp/wp6587737.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Shaktiman</h4>
+                        <a href="shorts/Shaktiman.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://wallpapers.com/images/high/shin-chan-in-moon-9gsbzb4o9ten6m22.webp" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Shinchan</h4>
+                        <a href="shorts/SV.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a> </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="card-deck">
+                <div class="card bg-success card-hover" style="width: 400px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://wallpapers.com/images/high/nobita-shizuka-love-story-under-moon-22w9t9tn3lkbkuns.webp" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title" style="font-size: 17px;">Nobita-Sizuka Ki Prem Khani </h4>
+                        <a href="shorts/ns.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch  FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://wallpapercave.com/wp/wp9499037.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Krrish 4</h4>
+                        <a href="shorts/krrish 4.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch  FullScreen Video</a> </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://i.pinimg.com/564x/ba/fc/c3/bafcc35ea8edbbf65ed442ee267bad05.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Pokemon</h4>
+                        <a href="shorts/Pokemon.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a>
+                    </div>
+                </div>
+                <div class="card bg-success card-hover" style="width: 300px;height:  410px;">
+                    <div class="img-area">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/1/11/Pushpa_2-_The_Rule.jpg" class="card-img-top" width="250px" height="300px">
+                        <div class="overlay">
+                            <i class="fa fa-play fa-3x play-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body text-center ">
+                        <h4 class="card-title">Pushpa 2</h4>
+                        <a href="shorts/pushpa.mp4" class="btn btn-primary" onclick="openFullscreen()">Watch FullScreen Video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <section>
+        <div class="container my-5">
+            <div id="place" class="carousel slide" data-ride="carousel">
+                <ul class="carousel-indicators mt-3">
+                    <li data-target="#place" data-slide-to="0" class="active"></li>
+                    <li data-target="#place" data-slide-to="1"></li>
+                    <li data-target="#place" data-slide-to="2"></li>
+                </ul>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://wallpapercave.com/wp/wp1937324.png" alt="image1" height="80vh">
+                        <div class="carousel-caption">
+                            <h3 class="text-dark">Silent Voice</h3>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5HyWh-QZDiWDufb_ehi2vMopgNrYVxPllhInS8eihK7_g6ez83fCcAYE1cLx9xUYBMoR9aJ3jlenRgajrtEnTXXCGWgPsvdvWO4UfapwRG941NCGO0YocYkdETU7M9O-ZSitR20FyTM8VeH8wLTP1zLMZrpccOE15NUQ2qanW4NSLPuonODMwwS4Cw9Fv/s0/20240121_230820.jpg"
+                            alt="image2" height="30%">
+                        <div class="carousel-caption">
+                            <h3 class="text-dark">Salaar</h3>
+
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/anime3.jpg" alt="image3">
+                        <div class="carousel-caption">
+                            <h3 class="text-dark">Art</h3>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#place" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#place" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="my-5 bb" style="height: 70vh;">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <img id="cyn-dots" src="cyn-dots.svg" alt="" />
+                    <img id="living-room-2" src="images/anime2.jpg" alt="" />
+                    <img id="table" src="images/anime3.jpg" alt=" " />
+                    <img id="living-room-3" src="images/anime4.jpg" alt=" " />
+                </div>
+                <div class="col-lg-4 ">
+                    <h3>Some Pictures And Description</h3>
+                    <p class="opacity-dark-50 ">
+                        Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-md-3 ">
+                    <h3 id="hh ">About</h3>
+                    <p class="text-white ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur </p>
+                </div>
+                <div class="col-md-3 ">
+                    <h3>Anime List</h3>
+                    <ul id="foo " class="ff ">
+                        <li>Doreamon</li>
+                        <li>Demon Slayer</li>
+                        <li>Attack on Titan</li>
+                        <li>Naruto</li>
+                        <li>Shinchan</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 ">
+                    <h3>Links</h3>
+                    <ul id="foo " class="ff ">
+                        <li>Home</li>
+                        <li>About</li>
+                        <li>3D Gallery</li>
+                        <li>Service</li>
+                    </ul>
+                </div>
+                <div class="col-md-2 ">
+                    <h3>Follow Us</h3>
+                    <a href="# " class="text-white " style="text-decoration: none; "><img src="images/fb.png" alt="Facebook "></a>
+                    <a href="# " class="text-white " style="text-decoration: none; "><img src="images/github2.png" alt="Github "></a>
+                    <a href="# " class="text-white " style="text-decoration: none; "><img src="images/insta.png" alt="Instagram "></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p id="copyright">All Reserved &copy;Designed by Akash</p>
+    </footer>
+    <script>
+        function openNav() {
+            if (window.innerWidth < 768) {
+                document.getElementById("mySidebar ").style.width = "250px ";
+            }
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar ").style.width = "0 ";
+        }
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                document.getElementById("mySidebar ").style.width = "0 ";
+            }
+        });
+        $(document).ready(function() {
+            $('[data-toggle="tooltip "]').tooltip();
+        });
+
+        //from gpt
+        document.addEventListener('DOMContentLoaded', function() {
+            var watchVideoLinks = document.querySelectorAll('.watch-video');
+
+
+            function openFullscreen(event) {
+                event.preventDefault();
+                var videoUrl = this.href;
+                var videoElement = document.createElement('video');
+                videoElement.src = videoUrl;
+                videoElement.setAttribute('controls', true);
+                videoElement.setAttribute('autoplay', true);
+
+
+                if (videoElement.requestFullscreen) {
+                    videoElement.requestFullscreen();
+                } else if (videoElement.mozRequestFullScreen) { /* Firefox */
+                    videoElement.mozRequestFullScreen();
+                } else if (videoElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                    videoElement.webkitRequestFullscreen();
+                } else if (videoElement.msRequestFullscreen) { /* IE/Edge */
+                    videoElement.msRequestFullscreen();
+                } else {
+                    // Full-screen not supported, fallback to normal playback
+                    console.log('Fullscreen not supported.');
+                    videoElement.style.width = '100%'; // Fallback to inline playback
+                    this.parentNode.replaceChild(videoElement, this);
+                }
+            }
+            watchVideoLinks.forEach(function(link) {
+                link.addEventListener('click', openFullscreen);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    background-image: url(images/anime4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    height: 600px;
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    background-color: rgba(240, 235, 228, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container header {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+}
+
+.container .form {
+    margin-top: 30px;
+}
+
+.form .input-box {
+    width: 100%;
+    margin-top: -1px;
+}
+
+.input-box label {
+    color: #333;
+}
+
+.form .input-box input {
+    position: relative;
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    margin-top: 9px;
+    color: #707070;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+.form .select-box {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    margin-top: 9px;
+    color: #707070;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+.form .column {
+    display: flex;
+    column-gap: 15px;
+}
+
+.form .gender-box,
+.gender {
+    margin-top: 10px;
+}
+
+.form .gender-option {
+    display: flex;
+    column-gap: 15px;
+}
+
+.gender-box h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.gender input {
+    accent-color: rgb(222, 83, 13);
+}
+
+.form .gender {
+    column-gap: 5px;
+    cursor: pointer
+}
+
+.form :where(.gender-option, .gender) {
+    row-gap: 15px;
+}
+
+.select-box select {
+    height: 100%;
+    width: 105.8%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1.5rem;
+    margin-left: -15px;
+}
+
+.form button {
+    height: 55px;
+    width: 100%;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    background-color: lightslategrey;
+}
+
+.form button:hover {
+    background-color: green;
+    color: #333;
+    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+label {
+    font-weight: bold;
+}
+
+section {
+    height: 50%;
+}
+
+@media screen and(max-width:500px) {
+    .form .column {
+        flex-wrap: wrap;
+    }
+}

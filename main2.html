@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #202125;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        
+        .header-container h2 {
+            margin: 0;
+        }
+        
+        .hero {
+            height: 60vh;
+            text-align: center;
+            padding: 100px 0;
+            /* background-color: #e50914; */
+            background-image: url(images/displ.jpg);
+            background-position: 60%;
+            background-size: cover;
+            /* background: rgba(0, 0, 0, 0.5); */
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+        }
+        
+        .hero button {
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .hero button:hover {
+            background-color: white;
+            color: black;
+            border-radius: 20px 0 10px 2px;
+        }
+        
+        .diff {
+            min-height: 40vh;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        section .search-box {
+            margin-top: 10vh;
+            border-color: white;
+            position: relative;
+            height: 42px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .search-box input {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            background-color: #323334;
+            padding: 0 15px 0 45px;
+            color: #fff;
+            border-radius: 8px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            z-index: 2;
+            color: #999;
+            top: 50%;
+            left: 15px;
+            font-size: 20px;
+            transform: translateY(-50%);
+        }
+        
+        .movie-grid {
+            display: flex;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: -15px auto;
+        }
+        
+        .movie-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        .movie-item img {
+            max-width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            transition: transform 0.2s linear;
+        }
+        
+        #lucii:hover {
+            transform: scale(1.01);
+        }
+        
+        .movie-item a #lucii {
+            width: 150vw;
+            height: 90%;
+            border-radius: 10px 5px 15px 0px;
+        }
+        
+        .hi {
+            display: none;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            border-radius: 160px 0 160px 0;
+            background: linear-gradient(145deg, #5c5a5a, #1e2227);
+            ;
+            padding: 20px 0;
+        }
+        
+        .ff li:hover {
+            color: rgba(255, 42, 0, 0.9);
+            cursor: pointer;
+        }
+        
+        .footer h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer ul li {
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .footer a img {
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+        }
+        
+        hr {
+            border-top: 1px solid white;
+        }
+        
+        #copyright {
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
+        }
+        
+        #living-room-1 {
+            height: 70vh;
+            border-radius: 10%;
+            position: relative;
+            z-index: 1;
+            top: -20%;
+            left: 25%;
+        }
+        
+        #cyan-dots {
+            position: relative;
+            z-index: 1;
+            top: 30%;
+        }
+        
+        #living-room-2 {
+            height: 30vh;
+            width: 25vw;
+            border-radius: 10%;
+            position: relative;
+            z-index: 1;
+            top: -3%;
+            left: -25%;
+        }
+        
+        #table {
+            height: 40vh;
+            border-radius: 10%;
+            position: relative;
+            z-index: 2;
+            top: -20%;
+            left: 40%;
+        }
+        
+        #living-room-3 {
+            height: 30vh;
+            width: 25vw;
+            border-radius: 10%;
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 80%;
+        }
+        
+        #cyan-dots,
+        #living-room-2,
+        #table,
+        #living-room-3 {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        #cyan-dots:hover,
+        #living-room-2:hover,
+        #table:hover,
+        #living-room-3:hover {
+            transform: translateY(-5px) scale(1.05) rotate(5deg);
+        }
+        
+        .abt .container-fluid ul {
+            display: flex;
+            margin-left: 40%;
+        }
+        
+        .abt .container-fluid ul li {
+            position: relative;
+            display: block;
+            height: 60px;
+            width: 60px;
+            font-size: 30px;
+            line-height: 60px;
+            color: #666;
+            cursor: pointer;
+            border-radius: 50%;
+            margin: 0 15px;
+            background-color: #171515;
+        }
+        
+        .abt .titl::after {
+            content: "";
+            position: absolute;
+            width: 20%;
+            height: 0.175rem;
+            top: 322%;
+            left: 40%;
+            bottom: 590%;
+            background-color: #0A82ED;
+        }
+        
+        .abt .titl::after {
+            transform: scale(0, 1);
+            transform-origin: 0% 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .abt .titl:hover::after {
+            transform: scale(1, 1);
+        }
+        
+        .abt .container-fluid ul li:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #0A82ED;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            z-index: -1;
+            transform: scale(0.9);
+            transition: 0.5s;
+        }
+        
+        .abt .container-fluid ul li.ch-1:hover:before {
+            filter: blur(4px);
+            box-shadow: 0 0 15px #0A82ED;
+            transform: scale(1.2);
+        }
+        
+        .abt .container-fluid ul li.ch-2:before {
+            background-color: #e23760;
+        }
+        
+        .abt .container-fluid ul li.ch-2:hover:before {
+            filter: blur(4px);
+            box-shadow: 0 0 15px #e23760;
+            transform: scale(1.2);
+        }
+        
+        .abt .container-fluid ul li.ch-3:before {
+            background-color: #0A82ED;
+        }
+        
+        .abt .container-fluid ul li.ch-3:hover:before {
+            filter: blur(4px);
+            box-shadow: 0 0 15px #0A82ED;
+            transform: scale(1.2);
+        }
+        
+        .abt .container-fluid ul li.ch-4:before {
+            background-color: #04a2ffb3;
+        }
+        
+        .abt .container-fluid ul li.ch-4:hover:before {
+            filter: blur(4px);
+            box-shadow: 0 0 15px #04a2ffb3;
+            transform: scale(1.2);
+        }
+        
+        .zzz {
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="zz">
+        <header class="header-container ">
+            <div class="col-md-2"></div>
+            <h2 class="text-light text-center zzz">TV<span style="color: red;">FLix</span></h2>
+            <div class="col-md-2 d-flex justify-content-end he">
+                <li class="nav-item mr-4">
+                    <a class="nav-link text-light" href="#"><i class="bi bi-person-check fa-2x chng" style="color: orange;" data-toggle="popover" data-placement="top" title="User already logged in"></i></a>
+                </li>
+            </div>
+        </header>
+    </section>
+    <div class="conatiner-fluid ">
+        <section style="width: 90vw; margin-left: 70px;">
+            <nav class="navbar navbar-expand-lg navbar-dark ">
+                <a class="navbar-brand text-light" href="main.html">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="openNav()">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#imagelink"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="3d.html">3D view</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#footer">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+        <section class="hero">
+            <div class="hero-text">
+                <h1 class="text-light" style="font-weight: bold; margin-top: -5%;">Welcome to TVFLIx</h1>
+                <p class="text-dark" style="font-size: 18px; font-weight: 300px;">These Website is only for search purpose</p>
+                <button id="ho">U Already Logged In<span class="emoji emoji1">😀</span></button>
+            </div>
+        </section>
+        <section class="diff">
+            <div class="search-box">
+                <a class="nav-link text-light" href="#"><i class="fas fa-search mt-3" style="color: #FFD43B;"></i></a>
+                <input type="text" placeholder="search a movie">
+            </div>
+        </section>
+        <div class="movie-grid" id="mov" style="margin-top: -10%; column-gap: 100px; margin-left: 18%; ">
+            <div class="movie-item " id="luci">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/Naruto.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Naruto</h2>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/CM.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Chainsaw man</h2>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/DN.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Deathnote</h2>
+                </a>
+            </div>
+        </div>
+        <div class="movie-grid" id="mov" style="margin-top: 6%; column-gap: 100px; margin-left: 18%;">
+            <div class="movie-item" id="luci">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/Kalki.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Kalki</h2>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/Amkdt.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">ABKDT</h2>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/tmkoc" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">TMKOC</h2>
+                </a>
+            </div>
+        </div>
+        <div class="movie-grid" id="mov" style="margin-top: 5%; column-gap: 100px; margin-left: 18%;">
+            <div class="movie-item" id="luci">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/ns.mp4" type="video/mp4">
+                    </video>
+                    <h4 style="color: white; font-size: 15px; font-weight: bold;" id="nam">Nobita Sizuka Ki Prem Kahani</h4>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a id="Sv">
+                    <video width="200" height="300" controls>
+                        <source src="shorts/SV.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Silent voice</h2>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/Wkd.mp4" type="video/mp4">
+                    </video>
+                    <h4 style="color: white;" id="nam">Wagle Ki Duniya</h4>
+                </a>
+            </div>
+        </div>
+
+        <div class="movie-grid" id="mov" style="margin-top: 6%; column-gap: 100px; margin-left: 18%;">
+            <div class="movie-item" id="luci">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/kanguva.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Kanguva</h2>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/Shaktiman.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Shaktiman</h2>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a>
+                    <video width="200" height="300" controls>
+                        <source src="shorts/BN.mp4" type="video/mp4">
+                    </video>
+                    <h2 style="color: white;" id="nam">Bad Newz</h2>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="hi">
+            <div class="movie-grid" id="mov" style="margin-top: 6%; margin-left: 12%;">
+                <div class="movie-item d-flex justify-center align-items-center " style="width: 800px; height: 400px;margin-left: 150px; ">
+                    <a>
+                        <video width="600px" class="d-flex justify-content-center align-items-center" height="200px" controls loop style="margin-top: -3%;margin-left: 40px;">
+                            <source src="shorts/pushpa.mp4" type="video/mp4">
+                        </video>
+                        <h2 style="color: white;" id="nam">Pushpa 2</h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section style="margin-top: 10%;">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <img id="cyan-dots" class="img-fluid" src="yell-do.svg" alt="" />
+                    <img id="living-room-2" class="img-fluid" src="images/anime1.jpg" alt="" />
+                    <img id="table" class="img-fluid" src="images/anime2.jpg" alt="" />
+                    <img id="living-room-3" class="img-fluid" src="images/anime3.jpg" alt="" />
+                </div>
+                <div class="col-lg-4">
+                    <h3 class="text-light" style="text-decoration: underline; font-weight: 600;">About Webpage</h3>
+                    <p class="opacity-dark-50 text-light">
+                        Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="abt mt-5">
+        <div class="container-fluid">
+            <div class="titl">
+                <h3 class="d-flex justify-content-center align-items-center text-light fw-bold " style="cursor: pointer; color: blue;">SocialMedia Links</h3>
+            </div>
+            <ul style="margin-top: 40px;">
+                <a href="https://www.facebook.com/profile.php?id=100025136346116">
+                    <li class="ch-1"><i class="fab fa-facebook-f ml-3 "></i></li>
+                </a>
+                <a href="https://www.instagram.com/_akashkmr23/">
+                    <li class="ch-2"><i class="fab fa-instagram  ml-3"></i></li>
+                </a>
+                <a href="https://github.com/Akashkmr07">
+                    <li class="ch-3"><i class="fab fa-github ml-3"></i></li>
+                </a>
+                <a href="https://www.linkedin.com/in/akashkmr23/">
+                    <li class="ch-4"><i class="fab fa-linkedin ml-3"></i></li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 id="hh">About</h3>
+                    <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur </p>
+                </div>
+                <div class="col-md-3">
+                    <h3> List</h3>
+                    <ul id="foo" class="ff">
+                        <li>Kalki</li>
+                        <li>Silent Voice</li>
+                        <li>Shaktiman</li>
+                        <li>Naruto</li>
+                        <li>BadNewz</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3>Links</h3>
+                    <ul id="foo" class="ff">
+                        <li>Home</li>
+                        <li>About</li>
+                        <a href="3d.html">
+                            <li>3D Gallery</li>
+                        </a>
+                        <li>Service</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3>Follow Us</h3>
+                    <a href="https://www.facebook.com/profile.php?id=100025136346116"><img src="images/fb.png" alt="Facebook"></a>
+                    <a href="https://github.com/Akashkmr07"><img src="images/github2.png" alt="Github"></a>
+                    <a href="https://www.instagram.com/_akashkmr23/"><img src="images/insta.png" alt="Instagram"></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p id="copyright">All Reserved &copy;Designed by Akash</p>
+    </footer>
+
+    <script>
+        function searchMovies() {
+            var input, filter, movieGrid, movieItem, a, h2, i, txtValue, hasResults = false;
+            input = document.querySelector('.search-box input');
+            filter = input.value.toUpperCase();
+            movieGrid = document.querySelectorAll('.movie-grid');
+
+
+            movieGrid.forEach(function(grid) {
+                movieItem = grid.querySelectorAll('.movie-item');
+                var gridHasResults = false;
+
+
+                for (i = 0; i < movieItem.length; i++) {
+                    a = movieItem[i].querySelector('a');
+                    h2 = a.querySelector('#nam');
+                    txtValue = h2.textContent || h2.innerText;
+
+                    // Show or hide the movie item 
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        movieItem[i].style.display = 'block';
+                        var video = a.querySelector('video');
+                        video.style.height = '390px';
+                        video.style.width = '700px';
+                        gridHasResults = true;
+                    } else {
+                        movieItem[i].style.display = 'none';
+                    }
+                }
+
+                // If the current grid has results show it so otherwise hide it
+                if (gridHasResults) {
+                    grid.style.display = 'flex';
+                    hasResults = true; // Update the overall result status
+                } else {
+                    grid.style.display = 'none';
+                }
+            });
+
+            var hiClass = document.querySelector('.hi');
+            if (hiClass) {
+                hiClass.style.display = hasResults ? 'block' : 'none';
+            }
+        }
+
+
+        document.querySelector('.search-box input').addEventListener('keyup', searchMovies);
+    </script>
+</body>
+
+</html>

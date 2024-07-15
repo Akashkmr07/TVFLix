@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .box {
+            background: url(images/anime5.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .box:before {
+            content: "";
+            background: url(images/anime4.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            mix-blend-mode: screen;
+        }
+        
+        .image {
+            position: relative;
+            width: 200px;
+            height: 230px;
+            transform-style: preserve-3d;
+            animation: animate 30s linear infinite;
+        }
+        
+        @keyframes animate {
+            0% {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+            100% {
+                transform: perspective(1000px) rotateY(-360deg);
+            }
+        }
+        
+        .image span {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            transform-style: preserve-3d;
+            transform-origin: center;
+            transform: rotateY(calc(var(--i)*45deg)) translateZ(370px);
+        }
+        
+        h2 {
+            color: red;
+            position: relative;
+            font-size: 50px;
+            bottom: 10%;
+            text-align: center;
+        }
+        
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: 1.5s;
+        }
+        
+        .image span img:hover {
+            transform: translateY(30px) scale(1.2);
+            cursor: pointer;
+            box-shadow: 0 0 10px black;
+            border-radius: 30px;
+        }
+        
+        @media (max-width: 400px) {
+            body {
+                background-image: url(anime5.jpg);
+            }
+            .image {
+                height: 200px;
+                width: 150px;
+            }
+            .image span img:hover {
+                transform: translateY(20px) scale(1.1);
+            }
+            .image span {
+                transform: rotateY(calc(var(--i)*30deg)) translateZ(320px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text">
+        <h2 style="color: black;">TV<span style="color: red">FLix</span> 3D Image Viewer</h2>
+    </div>
+    <div class="box">
+        <div class="image">
+            <span style="--i:0;"><img src="images/anime6.jpeg"></span>
+            <span style="--i:1;"><img src="images/anime3.jpg"></span>
+            <span style="--i:2;"><img src="https://stat5.bollywoodhungama.in/wp-content/uploads/2024/06/Bad-Newz-2-322x402.jpg"></span>
+            <span style="--i:3;"><img src="https://i.pinimg.com/564x/ec/78/23/ec78239d62ba59f93d27412338657021.jpg"></span>
+            <span style="--i:4;"><img src="https://m.media-amazon.com/images/M/MV5BYTY4NjM0NmUtY2JmMS00MWQ0LThmNjgtYjkyNzczMTI2Njc0XkEyXkFqcGdeQXVyMTQ3Mzk2MDg4._V1_QL75_UX1230_.jpg"></span>
+            <span style="--i:5;"><img src="https://media5.bollywoodhungama.in/wp-content/uploads/2024/06/Kalki-2898-AD-10-322x483.jpg"></span>
+            <span style="--i:6;"><img src="https://e0.pxfuel.com/wallpapers/330/978/desktop-wallpaper-jujutsu-kaisen-battle-vertical-in-2021-anime-villians-anime-anime-background-thumbnail.jpg"></span>
+            <span style="--i:7;"><img src="https://e1.pxfuel.com/desktop-wallpaper/820/206/desktop-wallpaper-one-piece-vertical-anime-vertical-thumbnail.jpg"></span>
+        </div>
+    </div>
+
+    <script>
+        function adjustImageSize() {
+            const images = document.querySelectorAll('.image img');
+            const viewportWidth = window.innerWidth;
+
+            images.forEach(img => {
+                if (viewportWidth < 400) {
+                    img.style.width = '150px';
+                    img.style.height = '200px';
+                } else {
+                    img.style.width = '200px';
+                    img.style.height = '230px';
+                }
+            });
+        }
+
+        //image size adjust
+        window.addEventListener('resize', adjustImageSize);
+
+
+        adjustImageSize();
+
+        //stop the animation
+        function toggleAnimation() {
+            const imageContainer = document.querySelector('.image');
+            imageContainer.addEventListener('mouseover', () => {
+                imageContainer.style.animationPlayState = 'paused';
+            });
+            imageContainer.addEventListener('mouseout', () => {
+                imageContainer.style.animationPlayState = 'running';
+            });
+        }
+        toggleAnimation();
+    </script>
+</body>
+
+</html>
